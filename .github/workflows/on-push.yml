@@ -1,7 +1,7 @@
 name: Push Test
 on: [push, workflow_dispatch]
 jobs:
-  test:
+  test-and-lint:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -14,19 +14,5 @@ jobs:
         run: npm ci
       - name: Run tests
         run: npm run test
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get code
-        uses: actions/checkout@v4
-      - name: Install NodeJS
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-      - name: Install depedencies
-        run: npm ci
-      - name: Build project
-        run: npm run build
-      - name: Deploy
-        run: echo "Deploying..."
+      - name: Run lint
+        run: npm run lint
