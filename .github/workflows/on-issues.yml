@@ -1,0 +1,14 @@
+name: Label issues
+on:
+  issues:
+    types:
+      - reopened
+      - opened
+jobs:
+  label-issues:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Describe issues
+        run: echo ${{ github.event.issue }}
